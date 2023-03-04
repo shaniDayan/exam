@@ -8,16 +8,18 @@ int  FindLongestPath(char matrix[N][M], int row, int col){
     כל המקומום הראשונים מסמנים את השורה
     וכל המקומות השני מסמנים את העמודה*/
     int step[4][2]={{-1,0}, {1,0},{0,-1},{0,1}};
+    // אוסף בשביל האלכסונים ובפור עד 8
+    {-1,1},{-1,-1},{1,1},{1,-1}
     int max=0;
 
     char where_we_are = matrix[row][col];
-    matrix[row][col]=CANT_GO;// מסמן שהיינו במקום הזה ואין צורך לבדוק שוב
+    matrix[row][col]=CANT_GO;
 
     for(int direction=0; direction<4;direction++){
         int temp_row=row+step[direction][0]; 
         int temp_col=col+step[direction][1];
         if(!isSafe(temp_row,temp_col)) continue;
-        int length = do_it(matrix,temp_row,temp_col);
+        int length = FindLongestPath(matrix,temp_row,temp_col);
         if(length>max){
             max=length;
         }
